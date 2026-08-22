@@ -50,14 +50,23 @@ model Product {
   orderItems    OrderItem[]
 }
 
+enum DeliveryMethod {
+  courier
+  pickup
+}
+
 model Order {
-  id         Int         @id @default(autoincrement())
-  userId     Int
-  user       User        @relation(fields: [userId], references: [id])
-  items      OrderItem[]
-  totalPrice Int
-  status     String      @default("pending") // pending | shipped | delivered
-  createdAt  DateTime    @default(now())
+  id             Int            @id @default(autoincrement())
+  userId         Int
+  user           User           @relation(fields: [userId], references: [id])
+  items          OrderItem[]
+  totalPrice     Int
+  status         String         @default("pending") // pending | shipped | delivered
+  fullName       String
+  phone          String
+  address        String
+  deliveryMethod DeliveryMethod
+  createdAt      DateTime       @default(now())
 }
 
 model OrderItem {
