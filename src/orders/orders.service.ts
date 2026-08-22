@@ -61,4 +61,12 @@ export class OrdersService {
       });
     });
   }
+
+  findAllForUser(userId: number) {
+    return this.prisma.order.findMany({
+      where: { userId },
+      include: { items: true },
+      orderBy: { createdAt: 'desc' },
+    });
+  }
 }
